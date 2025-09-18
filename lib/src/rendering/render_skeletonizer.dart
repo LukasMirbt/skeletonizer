@@ -94,8 +94,12 @@ class RenderSkeletonizer extends RenderProxyBox
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
-    if (_ignorePointers) return false;
-    return super.hitTest(result, position: position);
+    if (_enabled && _ignorePointers) return false;
+    
+    return super.hitTest(
+      result,
+      position: position,
+    );
   }
 }
 
@@ -191,10 +195,13 @@ class RenderSliverSkeletonizer extends RenderProxySliver
   @override
   bool hitTest(SliverHitTestResult result,
       {required double mainAxisPosition, required double crossAxisPosition}) {
-    if (_ignorePointers) return false;
-    return super.hitTest(result,
-        mainAxisPosition: mainAxisPosition,
-        crossAxisPosition: crossAxisPosition);
+    if (_enabled && _ignorePointers) return false;
+
+    return super.hitTest(
+      result,
+      mainAxisPosition: mainAxisPosition,
+      crossAxisPosition: crossAxisPosition,
+    );
   }
 }
 
@@ -244,7 +251,7 @@ mixin _RenderSkeletonBase<R extends RenderObject>
       super.paint(context, offset);
       return;
     }
-    
+
     final skeletonizerContext =
         createSkeletonizerContext(context, layer!, offset);
     super.paint(skeletonizerContext, offset);
