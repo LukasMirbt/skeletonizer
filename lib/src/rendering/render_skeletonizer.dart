@@ -240,6 +240,11 @@ mixin _RenderSkeletonBase<R extends RenderObject>
 
   @override
   void paint(PaintingContext context, Offset offset) {
+    if (!enabled) {
+      super.paint(context, offset);
+      return;
+    }
+    
     final skeletonizerContext =
         createSkeletonizerContext(context, layer!, offset);
     super.paint(skeletonizerContext, offset);
