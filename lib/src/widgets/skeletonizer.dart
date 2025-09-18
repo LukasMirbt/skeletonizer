@@ -305,14 +305,11 @@ class _Skeletonizer extends Skeletonizer {
   Widget build(BuildContext context, SkeletonizerBuildData data) {
     Widget body = data.enabled
         ? SkeletonizerRenderObjectWidget(
-            key: const ValueKey('skeletonizer'),
             data: data,
             child: child,
           )
-        : KeyedSubtree(
-            key: const ValueKey('content'),
-            child: child,
-          );
+        : child;
+
     if (data.config.enableSwitchAnimation) {
       final switchConfig = data.config.switchAnimationConfig;
       body = AnimatedSwitcher(
