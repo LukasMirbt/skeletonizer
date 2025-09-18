@@ -303,12 +303,11 @@ class _Skeletonizer extends Skeletonizer {
 
   @override
   Widget build(BuildContext context, SkeletonizerBuildData data) {
-    Widget body = data.enabled
-        ? SkeletonizerRenderObjectWidget(
-            data: data,
-            child: child,
-          )
-        : child;
+    Widget body = SkeletonizerRenderObjectWidget(
+      enabled: enabled,
+      data: data,
+      child: child,
+    );
 
     if (data.config.enableSwitchAnimation) {
       final switchConfig = data.config.switchAnimationConfig;
@@ -369,12 +368,11 @@ class SliverSkeletonizer extends Skeletonizer {
       isZone: data.isZone,
       isInsideZone: data.isInsideZone,
       animationController: data.animationController,
-      child: data.enabled
-          ? SliverSkeletonizerRenderObjectWidget(
-              data: data,
-              child: child,
-            )
-          : child,
+      child: SliverSkeletonizerRenderObjectWidget(
+        enabled: enabled,
+        data: data,
+        child: child,
+      ),
     );
   }
 }

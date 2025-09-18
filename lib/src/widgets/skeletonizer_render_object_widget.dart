@@ -9,10 +9,14 @@ class SkeletonizerRenderObjectWidget extends SingleChildRenderObjectWidget {
     super.key,
     required super.child,
     required this.data,
+    required this.enabled,
   });
 
   /// The Skeletonizer build data
   final SkeletonizerBuildData data;
+
+  /// Whether the skeletonizer is enabled
+  final bool enabled;
 
   @override
   RenderSkeletonizer createRenderObject(BuildContext context) {
@@ -22,6 +26,7 @@ class SkeletonizerRenderObjectWidget extends SingleChildRenderObjectWidget {
       config: data.config,
       ignorePointers: data.ignorePointers,
       isZone: data.isZone,
+      enabled: enabled,
     );
   }
 
@@ -35,7 +40,8 @@ class SkeletonizerRenderObjectWidget extends SingleChildRenderObjectWidget {
       ..config = data.config
       ..ignorePointers = data.ignorePointers
       ..isZone = data.isZone
-      ..textDirection = data.textDirection;
+      ..textDirection = data.textDirection
+      ..enabled = enabled;
   }
 }
 
@@ -47,10 +53,14 @@ class SliverSkeletonizerRenderObjectWidget
     super.key,
     required super.child,
     required this.data,
+    required this.enabled,
   });
 
   /// The Skeletonizer build data
   final SkeletonizerBuildData data;
+
+  /// Whether the skeletonizer is enabled
+  final bool enabled;
 
   @override
   RenderSliverSkeletonizer createRenderObject(BuildContext context) {
@@ -60,6 +70,7 @@ class SliverSkeletonizerRenderObjectWidget
       config: data.config,
       ignorePointers: data.ignorePointers,
       isZone: data.isZone,
+      enabled: enabled,
     );
   }
 
@@ -73,6 +84,7 @@ class SliverSkeletonizerRenderObjectWidget
       ..config = data.config
       ..ignorePointers = data.ignorePointers
       ..isZone = data.isZone
-      ..textDirection = data.textDirection;
+      ..textDirection = data.textDirection
+      ..enabled = enabled;
   }
 }

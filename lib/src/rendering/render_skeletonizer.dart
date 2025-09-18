@@ -13,11 +13,13 @@ class RenderSkeletonizer extends RenderProxyBox
     required SkeletonizerConfigData config,
     required bool ignorePointers,
     required bool isZone,
+    required bool enabled,
     RenderBox? child,
   })  : _animationValue = animationValue,
         _textDirection = textDirection,
         _config = config,
         _isZone = isZone,
+        _enabled = enabled,
         _ignorePointers = ignorePointers,
         super(child);
 
@@ -74,6 +76,18 @@ class RenderSkeletonizer extends RenderProxyBox
   set animationValue(double value) {
     if (_animationValue != value) {
       _animationValue = value;
+      markNeedsPaint();
+    }
+  }
+
+  bool _enabled;
+
+  @override
+  bool get enabled => _enabled;
+
+  set enabled(bool value) {
+    if (_enabled != value) {
+      _enabled = value;
       markNeedsPaint();
     }
   }
@@ -96,12 +110,14 @@ class RenderSliverSkeletonizer extends RenderProxySliver
     required SkeletonizerConfigData config,
     required bool ignorePointers,
     required bool isZone,
+    required bool enabled,
     RenderSliver? child,
   })  : _animationValue = animationValue,
         _textDirection = textDirection,
         _config = config,
         _isZone = isZone,
         _ignorePointers = ignorePointers,
+        _enabled = enabled,
         super(child);
 
   TextDirection _textDirection;
@@ -156,6 +172,18 @@ class RenderSliverSkeletonizer extends RenderProxySliver
   set animationValue(double value) {
     if (_animationValue != value) {
       _animationValue = value;
+      markNeedsPaint();
+    }
+  }
+
+  bool _enabled;
+
+  @override
+  bool get enabled => _enabled;
+
+  set enabled(bool value) {
+    if (_enabled != value) {
+      _enabled = value;
       markNeedsPaint();
     }
   }
@@ -183,6 +211,8 @@ mixin _RenderSkeletonBase<R extends RenderObject>
 
   /// if true, only [Bone] and [Skeletonizer] widgets will be shaded
   bool get isZone;
+
+  bool get enabled;
 
   @override
   bool get isRepaintBoundary => true;
